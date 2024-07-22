@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://mediaDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="mediaDc"
+                  class="com.foxycorp.digifox.entity.Media">
+            <fetchPlan extends="_base"/>
+            <loader id="mediaDl"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="mediaDc">
+            <select id="mediaTypeField" property="mediaType"/>
+            <textField id="quantityField" property="quantity"/>
+        </formLayout>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

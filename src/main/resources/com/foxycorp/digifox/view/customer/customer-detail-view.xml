@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://customerDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="customerDc"
+                  class="com.foxycorp.digifox.entity.Customer">
+            <fetchPlan extends="_base">
+                <property name="orders" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="loader"/>
+            <collection id="ordersDc" property="orders"></collection>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <settings id="settings">
+            <component id="dataGrid"/>
+        </settings>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="customerDc">
+            <textField id="nameField" property="name"/>
+            <textField id="profileLinkField" property="profileLink"/>
+            <textField id="commentField" property="comment"/>
+            <textField id="totalPaidField" property="totalPaid" readOnly="true"/>
+        </formLayout>
+        <hbox id="buttonsPanel" alignSelf="CENTER">
+            <button action="ordersDataGrid.add"/>
+            <button action="ordersDataGrid.edit"/>
+            <button action="ordersDataGrid.exclude"/>
+        </hbox>
+        <dataGrid id="ordersDataGrid" dataContainer="ordersDc" width="100%">
+            <actions>
+                <action id="add" type="list_add"/>
+                <action id="edit" type="list_edit"/>
+                <action id="exclude" type="list_exclude"/>
+            </actions>
+            <columns>
+                <column property="dateIn"/>
+                <column property="dateOut"/>
+                <column property="duration"/>
+                <column property="paid"/>
+            </columns>
+        </dataGrid>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

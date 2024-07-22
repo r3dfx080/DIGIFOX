@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="MISC"
+      focusComponent="vCRMaintenancesDataGrid">
+    <data>
+        <collection id="vCRMaintenancesDc"
+                    class="com.foxycorp.digifox.entity.VCRMaintenance">
+            <fetchPlan extends="_base"/>
+            <loader id="vCRMaintenancesDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from VCRMaintenance e]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="expensesDc"
+                    class="com.foxycorp.digifox.entity.Expense">
+            <fetchPlan extends="_base"/>
+            <loader id="expensesDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Expense e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <hbox id="gridbox" minWidth="100%">
+            <vbox margin="true">
+                <h3 text="VCR heads cleaning" alignSelf="CENTER"/>
+                <genericFilter id="genericFilter"
+                               dataLoader="vCRMaintenancesDl" opened="false">
+                    <properties include=".*"/>
+                </genericFilter>
+                <hbox id="buttonsPanel" classNames="buttons-panel" colspan="1" width="50%" alignItems="AUTO"
+                      alignSelf="CENTER">
+                    <button id="createBtn" action="vCRMaintenancesDataGrid.create"/>
+                    <button id="editBtn" action="vCRMaintenancesDataGrid.edit"/>
+                    <button id="removeBtn" action="vCRMaintenancesDataGrid.remove"/>
+                </hbox>
+                <dataGrid id="vCRMaintenancesDataGrid"
+                          width="100%"
+                          minHeight="20em"
+                          dataContainer="vCRMaintenancesDc"
+                          columnReorderingAllowed="true">
+                    <actions>
+                        <action id="create" type="list_create"/>
+                        <action id="edit" type="list_edit"/>
+                        <action id="remove" type="list_remove"/>
+                    </actions>
+                    <columns resizable="true">
+                        <column property="vcr_model"/>
+                        <column property="cleaned_on_hrs"/>
+                        <column property="date"/>
+                    </columns>
+                </dataGrid>
+                <simplePagination id="pagination" dataLoader="vCRMaintenancesDl" alignSelf="CENTER"/>
+            </vbox>
+            <vbox alignSelf="END" margin="true">
+                <h3 text="Expenses" alignSelf="CENTER"/>
+                <genericFilter id="genericFilter"
+                           dataLoader="expensesDl" alignSelf="START" opened="false">
+                        <properties include=".*"/>
+                    </genericFilter>
+                <hbox id="buttonsPanel_ex" classNames="buttons-panel"
+                      alignSelf="CENTER" width="50%">
+                        <button id="createBtn_ex" action="expensesDataGrid.create"/>
+                        <button id="editBtn_ex" action="expensesDataGrid.edit"/>
+                        <button id="removeBtn_ex" action="expensesDataGrid.remove"/>
+                    </hbox>
+                <dataGrid id="expensesDataGrid"
+                          width="100%"
+                          minHeight="20em"
+                          dataContainer="expensesDc"
+                          columnReorderingAllowed="true">
+                        <actions>
+                            <action id="create" type="list_create"/>
+                            <action id="edit" type="list_edit"/>
+                            <action id="remove" type="list_remove"/>
+                        </actions>
+                        <columns resizable="true">
+                            <column property="expense_type"/>
+                            <column property="paid"/>
+                            <column property="date"/>
+                        </columns>
+                    </dataGrid>
+                <simplePagination id="pagination_ex" dataLoader="expensesDl" alignSelf="CENTER"/>
+            </vbox>
+        </hbox>
+    </layout>
+
+</view>

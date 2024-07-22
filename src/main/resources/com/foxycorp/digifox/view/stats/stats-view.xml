@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://statsView.title">
+    <data>
+    </data>
+    <layout minWidth="100%">
+        <vbox alignItems="CENTER">
+            <textField id="net_profit" width="20%"/>
+            <textField id="expenses" width="20%"/>
+            <textField id="totalHrs" width="20%"/>
+            <textField id="hrs_past_cleaning" width="20%"/>
+            <textField id="vhs_count" width="20%"/>
+            <textField id="vhs_c_count"  width="20%"/>
+            <textField id="video8_count"  width="20%"/>
+            <textField id="hi8_count"  width="20%"/>
+            <textField id="digital8_count"  width="20%"/>
+            <textField id="minidv_count" width="20%"/>
+            <textField id="cd_dvd_count" width="20%"/>
+        </vbox>
+
+
+    </layout>
+</view>

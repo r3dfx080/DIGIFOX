@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://orderDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="orderDc"
+                  class="com.foxycorp.digifox.entity.Order">
+            <fetchPlan extends="_base">
+                <property name="media" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="orderDl"/>
+            <collection id="mediasDc" property="media"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="orderDc">
+            <datePicker id="dateInField" property="dateIn"/>
+            <datePicker id="dateOutField" property="dateOut"/>
+            <textField id="durationField" property="duration"/>
+            <textField id="paidField" property="paid"/>
+            <fileStorageUploadField id="catalogField" property="catalog" colspan="2" clearButtonVisible="true"
+                                    dropAllowed="true" fileNameVisible="true"/>
+        </formLayout>
+        <hbox id="buttonsPanel" alignSelf="CENTER">
+            <button action="mediasDataGrid.create"/>
+            <button action="mediasDataGrid.edit"/>
+            <button action="mediasDataGrid.remove"/>
+        </hbox>
+        <dataGrid id="mediasDataGrid" dataContainer="mediasDc" width="100%" maxWidth="50%" alignSelf="CENTER">
+            <actions>
+                <action id="create" type="list_add"/>
+                <action id="edit" type="list_edit"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns>
+                <column property="mediaType"/>
+                <column property="quantity"/>
+            </columns>
+        </dataGrid>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

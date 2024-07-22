@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://VCRMaintenanceDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="vCRMaintenanceDc"
+                  class="com.foxycorp.digifox.entity.VCRMaintenance">
+            <fetchPlan extends="_base"/>
+            <loader id="vCRMaintenanceDl"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="vCRMaintenanceDc" width="50%" alignSelf="CENTER">
+            <select id="vcr_modelField" property="vcr_model"/>
+            <textField id="cleaned_on_hrsField" property="cleaned_on_hrs"/>
+            <datePicker id="dateField" property="date"/>
+            <hbox alignItems="CENTER">
+                <button id="saveAndCloseBtn" action="saveAction"/>
+                <button id="closeBtn" action="closeAction"/>
+            </hbox>
+        </formLayout>
+    </layout>
+</view>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="DigiFox">
+        <dropForeignKeyConstraint baseTableName="ORDER_" constraintName="FK_ORDER__ON_CUSTOMER"/>
+    </changeSet>
+    <changeSet id="2" author="DigiFox">
+        <addForeignKeyConstraint baseColumnNames="CUSTOMER_ID" baseTableName="ORDER_"
+                                 constraintName="FK_ORDER__ON_CUSTOMER" onDelete="CASCADE" referencedColumnNames="ID"
+                                 referencedTableName="CUSTOMER"/>
+    </changeSet>
+</databaseChangeLog>

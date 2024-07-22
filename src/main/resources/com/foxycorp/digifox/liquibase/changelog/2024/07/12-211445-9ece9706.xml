@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="DigiFox">
+        <addNotNullConstraint columnDataType="UUID" columnName="CUSTOMER_ID" tableName="ORDER_" validate="true"/>
+    </changeSet>
+    <changeSet id="2" author="DigiFox">
+        <addNotNullConstraint columnDataType="UUID" columnName="ORDER_ID" tableName="MEDIA" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

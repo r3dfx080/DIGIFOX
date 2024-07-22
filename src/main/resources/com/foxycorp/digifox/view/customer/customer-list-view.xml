@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://customerListView.title"
+      focusComponent="customersDataGrid">
+    <data>
+        <collection id="customersDc"
+                    class="com.foxycorp.digifox.entity.Customer">
+            <fetchPlan>
+                <property name="name"/>
+                <property name="comment"/>
+                <property name="totalPaid"/>
+            </fetchPlan>
+            <loader id="customersDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Customer e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <hbox minWidth="100%">
+            <genericFilter id="genericFilter"
+                           dataLoader="customersDl" maxWidth="33%" opened="false">
+                <properties include=".*"/>
+            </genericFilter>
+            <hbox id="buttonsPanel" classNames="buttons-panel" maxWidth="33%"
+                  alignItems="AUTO" alignSelf="CENTER" boxSizing="BORDER_BOX">
+                <button id="createBtn" action="customersDataGrid.create"/>
+                <button id="editBtn" action="customersDataGrid.edit"/>
+                <button id="removeBtn" action="customersDataGrid.remove"/>
+            </hbox>
+        </hbox>
+        <dataGrid id="customersDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="customersDc"
+                  columnReorderingAllowed="true" multiSort="true" rowDraggable="true">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns resizable="true">
+                <column property="name"/>
+                <column property="totalPaid"/>
+                <column property="comment"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectBtn" action="selectAction"/>
+            <button id="discardBtn" action="discardAction"/>
+        </hbox>
+        <simplePagination id="pagination" dataLoader="customersDl" alignSelf="CENTER"/>
+    </layout>
+</view>
