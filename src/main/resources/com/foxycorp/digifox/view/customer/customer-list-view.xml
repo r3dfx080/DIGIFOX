@@ -9,7 +9,6 @@
             <fetchPlan>
                 <property name="name"/>
                 <property name="comment"/>
-                <property name="totalPaid"/>
             </fetchPlan>
             <loader id="customersDl" readOnly="true">
                 <query>
@@ -54,7 +53,6 @@
             </actions>
             <columns resizable="true">
                 <column property="name"/>
-                <column property="totalPaid"/>
                 <column property="comment"/>
             </columns>
         </dataGrid>

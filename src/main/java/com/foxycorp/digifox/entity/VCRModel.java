@@ -9,7 +9,8 @@ public enum VCRModel implements EnumClass<String> {
 
     NV_HD750("A"),
     NV_SD400("B"),
-    SR_55("C");
+    SR_55("C"),
+    J791AM("D");
 
     private final String id;
 

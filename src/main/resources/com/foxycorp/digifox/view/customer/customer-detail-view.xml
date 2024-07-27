@@ -27,7 +27,7 @@
             <textField id="nameField" property="name"/>
             <textField id="profileLinkField" property="profileLink"/>
             <textField id="commentField" property="comment"/>
-            <textField id="totalPaidField" property="totalPaid" readOnly="true"/>
+            <p id="totalPaid"/>
         </formLayout>
         <hbox id="buttonsPanel" alignSelf="CENTER">
             <button action="ordersDataGrid.add"/>

@@ -21,7 +21,7 @@ import javax.sql.DataSource;
 
 @Push
 @Theme(value = "DigiFox")
-@PWA(name = "DigiFox", shortName = "DigiFox")
+@PWA(name = "DigiFox", shortName = "DFox")
 @SpringBootApplication
 public class DigiFoxApplication implements AppShellConfigurator {
 

@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://jmix.io/schema/flowui/menu">
 
-    <menu id="application" title="msg://com.foxycorp.digifox/menu.application.title" opened="true">
+    <menu opened="true" id="application" title="msg://com.foxycorp.digifox/menu.application.title">
+        <item view="Media.list" title="Media" icon="vaadin:movie"/>
+        <item view="Order_.list" title="msg://com.foxycorp.digifox.view.order/orderListView.title"
+              icon="lumo:unordered-list"/>
+        <item view="Customer.list" title="msg://com.foxycorp.digifox.view.customer/customerListView.title"
+              icon="vaadin:group"/>
+        <item view="VCRMaintenance.list"
+              title="msg://com.foxycorp.digifox.view.vcrmaintenance/VCRMaintenanceListView.title" icon="vaadin:wrench"/>
+        <item view="StatsView" title="msg://com.foxycorp.digifox.view.stats/statsView.title"
+              icon="vaadin:pie-bar-chart"/>
         <item view="User.list" title="msg://com.foxycorp.digifox.view.user/UserListView.title"/>
-        <item view="Media.list" title="Media"/>
-        <item view="Order_.list" title="msg://com.foxycorp.digifox.view.order/orderListView.title"/>
-        <item view="Customer.list" title="msg://com.foxycorp.digifox.view.customer/customerListView.title"/>
-        <item view="VCRMaintenance.list" title="msg://com.foxycorp.digifox.view.vcrmaintenance/VCRMaintenanceListView.title"/>
-        <item view="StatsView" title="msg://com.foxycorp.digifox.view.stats/statsView.title"/>
     </menu>
-
 </menu-config>

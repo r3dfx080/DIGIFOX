@@ -1,15 +1,20 @@
 package com.foxycorp.digifox.view.login;
 
+import com.foxycorp.digifox.app.LogInNotificationService;
+import com.foxycorp.digifox.app.StatsService;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.login.AbstractLogin.LoginEvent;
 import com.vaadin.flow.component.login.LoginI18n;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.i18n.LocaleChangeEvent;
 import com.vaadin.flow.i18n.LocaleChangeObserver;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
+import com.vaadin.flow.theme.lumo.LumoUtility;
 import io.jmix.core.CoreProperties;
 import io.jmix.core.MessageTools;
 import io.jmix.core.security.AccessDeniedException;
+import io.jmix.flowui.Notifications;
 import io.jmix.flowui.component.loginform.JmixLoginForm;
 import io.jmix.flowui.kit.component.ComponentUtils;
 import io.jmix.flowui.kit.component.loginform.JmixLoginI18n;
@@ -57,6 +62,12 @@ public class LoginView extends StandardView implements LocaleChangeObserver {
 
     @Value("${ui.login.defaultPassword:}")
     private String defaultPassword;
+    @Autowired
+    private Notifications notifications;
+    @Autowired
+    private LogInNotificationService logInNotificationService;
+    @Autowired
+    private StatsService statsService;
 
     @Subscribe
     public void onInit(final InitEvent event) {
@@ -92,6 +103,17 @@ public class LoginView extends StandardView implements LocaleChangeObserver {
                             .withLocale(login.getSelectedLocale())
                             .withRememberMe(login.isRememberMe())
             );
+            int hrs_past_cleaning = statsService.getStats().getVcr_mins_past_cleaning()/60;
+            notifications.create(logInNotificationService.getActiveOrdersCount() + " active orders\n" +
+                                hrs_past_cleaning + " hours past cleaning")
+                                .withClassName(LumoUtility.Whitespace.PRE_LINE)
+                                .withThemeVariant(NotificationVariant.LUMO_CONTRAST)
+                                .withDuration(2000)
+                                .show();
+            if (hrs_past_cleaning > 90) notifications.create("MORE THAN 90 HOURS PAST LAST CLEANING! HEADS CLEANING NEEDED")
+                                .withThemeVariant(NotificationVariant.LUMO_ERROR)
+                                .withType(Notifications.Type.SYSTEM)
+                                .show();
         } catch (final BadCredentialsException | DisabledException | LockedException | AccessDeniedException e) {
             log.warn("Login failed for user '{}': {}", event.getUsername(), e.toString());
             event.getSource().setError(true);

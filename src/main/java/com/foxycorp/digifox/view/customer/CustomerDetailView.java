@@ -3,6 +3,7 @@ package com.foxycorp.digifox.view.customer;
 import com.foxycorp.digifox.entity.Customer;
 import com.foxycorp.digifox.entity.Order;
 import com.foxycorp.digifox.view.main.MainView;
+import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.router.Route;
 import io.jmix.flowui.component.textfield.TypedTextField;
 import io.jmix.flowui.model.CollectionPropertyContainer;
@@ -21,21 +22,19 @@ public class CustomerDetailView extends StandardDetailView<Customer> {
     @ViewComponent
     private CollectionPropertyContainer<Order> ordersDc;
     @ViewComponent
-    private TypedTextField<Integer> totalPaidField;
-    @ViewComponent
     private InstanceContainer<Customer> customerDc;
+    @ViewComponent
+    private Paragraph totalPaid;
 
     @Subscribe
     public void onInitEntity(final InitEntityEvent<Customer> event) {
         event.getEntity().setFirstOrderDate(LocalDate.now());
-        event.getEntity().setTotalPaid(0);
     }
 
     @Subscribe(id = "loader", target = Target.DATA_LOADER)
     public void onLoaderPostLoad(final InstanceLoader.PostLoadEvent<Customer> event) {
         List<Order> orders = ordersDc.getItems();
-        event.getLoadedEntity().setTotalPaid(orders.stream().map(Order::getPaid).reduce(0, Integer::sum));
-
+        totalPaid.setText("Total paid: " + orders.stream().map(Order::getPaid).reduce(0, Integer::sum) + "₽");
     }
 
 }

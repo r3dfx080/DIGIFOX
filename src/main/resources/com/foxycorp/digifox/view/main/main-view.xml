@@ -16,13 +16,11 @@
         </navigationBar>
         <drawerLayout>
             <section id="section" classNames="jmix-main-view-section">
-                <h2 id="applicationTitle"
-                    classNames="jmix-main-view-application-title">
-                    <anchor id="baseLink"
-                            href="."
-                            text="msg://applicationTitle.text"
-                            classNames="jmix-main-view-application-title-base-link"/>
-                </h2>
+                <hbox alignItems="CENTER" justifyContent="CENTER">
+                    <anchor href="/orders">
+                        <image resource="icons/ava.svg" height="3em" width="3em"/>
+                    </anchor>
+                </hbox>
                 <nav id="navigation"
                      classNames="jmix-main-view-navigation"
                      ariaLabel="msg://navigation.ariaLabel">

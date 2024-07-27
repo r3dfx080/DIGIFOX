@@ -9,7 +9,6 @@ import io.jmix.core.metamodel.datatype.DatatypeFormatter;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
-import jakarta.validation.constraints.PositiveOrZero;
 
 import java.net.URI;
 import java.time.LocalDate;
@@ -39,10 +38,6 @@ public class Customer {
     @Column(name = "COMMENT_")
     private String comment;
 
-    @PositiveOrZero
-    @Column(name = "TOTAL_PAID")
-    private Integer totalPaid;
-
     @OneToMany(mappedBy = "customer")
     private List<Order> orders;
 
@@ -60,14 +55,6 @@ public class Customer {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
-    }
-
-    public Integer getTotalPaid() {
-        return totalPaid;
-    }
-
-    public void setTotalPaid(Integer totalPaid) {
-        this.totalPaid = totalPaid;
     }
 
     public String getComment() {
