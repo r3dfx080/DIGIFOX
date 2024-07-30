@@ -9,7 +9,7 @@
                 <property name="orders" fetchPlan="_base"/>
             </fetchPlan>
             <loader id="loader"/>
-            <collection id="ordersDc" property="orders"></collection>
+            <collection id="ordersDc" property="orders"/>
         </instance>
     </data>
     <facets>

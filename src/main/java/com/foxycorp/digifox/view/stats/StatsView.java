@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.Map;
 
 @Route(value = "stats-view", layout = MainView.class)
 @ViewController("StatsView")
@@ -40,9 +41,9 @@ public class StatsView extends StandardView {
     private TypedTextField<Object> net_profit;
     @ViewComponent
     private TypedTextField<Object> expenses;
-
     @Subscribe
     public void onInit(final InitEvent event) {
+        //statistics
         DecimalFormat df = new DecimalFormat("####");
         df.setRoundingMode(RoundingMode.UP);
         Stats stats = statsService.getStats();
@@ -57,6 +58,7 @@ public class StatsView extends StandardView {
         digital8_count.setValue("DIGITAL8: " + stats.getDigital8_count().toString());
         minidv_count.setValue("MINIDV: " + stats.getMinidv_count().toString());
         cd_dvd_count.setValue("CD/DVD: " + stats.getCd_dvd_count().toString());
+
     }
 
 

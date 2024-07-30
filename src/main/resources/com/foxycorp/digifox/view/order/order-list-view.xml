@@ -43,7 +43,8 @@
                   width="100%"
                   minHeight="20em"
                   dataContainer="ordersDc"
-                  columnReorderingAllowed="true" allRowsVisible="true" multiSort="true">
+                  columnReorderingAllowed="true" allRowsVisible="true" multiSort="true" rowDraggable="true"
+                  themeNames="no-border">
             <actions>
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
@@ -55,6 +56,7 @@
                 <column property="dateOut"/>
                 <column property="duration"/>
                 <column property="paid"/>
+                <column property="comment"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">

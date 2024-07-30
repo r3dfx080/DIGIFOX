@@ -17,7 +17,5 @@
             <textField id="minidv_count" width="20%"/>
             <textField id="cd_dvd_count" width="20%"/>
         </vbox>
-
-
     </layout>
 </view>

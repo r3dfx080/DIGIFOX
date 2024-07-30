@@ -3,6 +3,9 @@
       title="msg://orderDetailView.title"
       focusComponent="form">
     <data>
+        <collection id="customerDC" class="com.foxycorp.digifox.entity.Customer">
+            <fetchPlan extends="_instance_name"/>
+        </collection>
         <instance id="orderDc"
                   class="com.foxycorp.digifox.entity.Order">
             <fetchPlan extends="_base">
@@ -25,8 +28,10 @@
             <datePicker id="dateOutField" property="dateOut"/>
             <textField id="durationField" property="duration"/>
             <textField id="paidField" property="paid"/>
+            <textField property="comment"/>
+            <textField id="customerField" enabled="false"/>
             <fileStorageUploadField id="catalogField" property="catalog" colspan="2" clearButtonVisible="true"
-                                    dropAllowed="true" fileNameVisible="true"/>
+                                    dropAllowed="true" fileNameVisible="true" alignSelf="CENTER"/>
         </formLayout>
         <hbox id="buttonsPanel" alignSelf="CENTER">
             <button action="mediasDataGrid.create"/>

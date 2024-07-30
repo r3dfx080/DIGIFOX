@@ -42,6 +42,9 @@ public class Order {
     @Column(name = "PAID")
     private Integer paid;
 
+    @Column(name = "COMMENT_")
+    private String comment;
+
     @Column(name = "CATALOG_", length = 1024)
     private FileRef catalog;
 
@@ -53,6 +56,14 @@ public class Order {
     @JoinColumn(name = "CUSTOMER_ID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Customer customer;
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 
     public FileRef getCatalog() {
         return catalog;
