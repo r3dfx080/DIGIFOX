@@ -1,21 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<view xmlns="http://jmix.io/schema/flowui/view"
+<view xmlns="http://jmix.io/schema/flowui/view" xmlns:charts="http://jmix.io/schema/charts/ui"
       title="msg://statsView.title">
     <data>
     </data>
     <layout minWidth="100%">
-        <vbox alignItems="CENTER">
-            <textField id="net_profit" width="20%"/>
-            <textField id="expenses" width="20%"/>
-            <textField id="totalHrs" width="20%"/>
-            <textField id="hrs_past_cleaning" width="20%"/>
-            <textField id="vhs_count" width="20%"/>
-            <textField id="vhs_c_count"  width="20%"/>
-            <textField id="video8_count"  width="20%"/>
-            <textField id="hi8_count"  width="20%"/>
-            <textField id="digital8_count"  width="20%"/>
-            <textField id="minidv_count" width="20%"/>
-            <textField id="cd_dvd_count" width="20%"/>
-        </vbox>
+        <hbox width="100%">
+            <charts:chart id="chart" minWidth="12em">
+                <charts:legend top="0"/>
+                <charts:tooltip trigger="ITEM" formatter="{b}: {d}%"/>
+                <charts:series>
+                    <charts:pie name="Type" radius="40% 80%">
+                        <charts:label show="false" position="CENTER"/>
+                        <charts:labelLine show="false"/>
+                        <charts:emphasis>
+                            <charts:label show="true" fontSize="30" fontWeight="bold"/>
+                        </charts:emphasis>
+                    </charts:pie>
+                </charts:series>
+            </charts:chart>
+            <vbox>
+                <textField id="net_profit" width="40%"/>
+                <textField id="hrPrice" width="40%"/>
+                <textField id="totalHrs" width="40%"/>
+                <textField id="hrs_past_cleaning" width="40%"/>
+                <textField id="expenses" width="40%"/>
+                <textField id="vhs_count" width="40%"/>
+                <textField id="vhs_c_count" width="40%"/>
+                <textField id="video8_count" width="40%"/>
+                <textField id="hi8_count" width="40%"/>
+                <textField id="digital8_count" width="40%"/>
+                <textField id="minidv_count" width="40%"/>
+                <textField id="cd_dvd_count" width="40%"/>
+            </vbox>
+        </hbox>
     </layout>
 </view>

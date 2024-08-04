@@ -2,3 +2,6 @@
 html {
     --lumo-primary-color: #ff9e3d;
 }
+.badged-icon {
+    padding: var(--lumo-space-xs);
+}

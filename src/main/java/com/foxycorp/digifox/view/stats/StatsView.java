@@ -5,6 +5,10 @@ import com.foxycorp.digifox.app.StatsService;
 import com.foxycorp.digifox.entity.Stats;
 import com.foxycorp.digifox.view.main.MainView;
 import com.vaadin.flow.router.Route;
+import io.jmix.chartsflowui.component.Chart;
+import io.jmix.chartsflowui.data.item.MapDataItem;
+import io.jmix.chartsflowui.kit.component.model.DataSet;
+import io.jmix.chartsflowui.kit.data.chart.ListChartItems;
 import io.jmix.flowui.component.textfield.TypedTextField;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +45,11 @@ public class StatsView extends StandardView {
     private TypedTextField<Object> net_profit;
     @ViewComponent
     private TypedTextField<Object> expenses;
+    @ViewComponent
+    private Chart chart;
+    @ViewComponent
+    private TypedTextField<Object> hrPrice;
+
     @Subscribe
     public void onInit(final InitEvent event) {
         //statistics
@@ -50,6 +59,7 @@ public class StatsView extends StandardView {
         net_profit.setValue("NET PROFIT: " + stats.getNet_profit().toString());
         expenses.setValue("EXPENSES: " + stats.getExpenses().toString());
         totalHrs.setValue("TOTAL HOURS: " + df.format(stats.getTotal_mins()/60));
+        hrPrice.setValue("HOUR PRICE: " + stats.getNet_profit()/(stats.getTotal_mins()/60-397));
         hrs_past_cleaning.setValue("HOURS PAST HEADS CLEANING: " + df.format(stats.getVcr_mins_past_cleaning()/60));
         vhs_count.setValue("VHS: " + stats.getVhs_count().toString());
         vhs_c_count.setValue("VHS-C: " + stats.getVhs_c_count().toString());
@@ -59,6 +69,25 @@ public class StatsView extends StandardView {
         minidv_count.setValue("MINIDV: " + stats.getMinidv_count().toString());
         cd_dvd_count.setValue("CD/DVD: " + stats.getCd_dvd_count().toString());
 
+        ListChartItems<MapDataItem> items = new ListChartItems<>(
+                new MapDataItem(Map.of("type", "VHS", "quantity", stats.getVhs_count())),
+                new MapDataItem(Map.of("type", "VHS-C", "quantity", stats.getVhs_c_count())),
+                new MapDataItem(Map.of("type", "Video8", "quantity", stats.getVideo8_count())),
+                new MapDataItem(Map.of("type", "Hi8", "quantity", stats.getHi8_count())),
+                new MapDataItem(Map.of("type", "Digital8", "quantity", stats.getDigital8_count())),
+                new MapDataItem(Map.of("type", "miniDV", "quantity", stats.getMinidv_count())),
+                new MapDataItem(Map.of("type", "CD/DVD", "quantity", stats.getCd_dvd_count()))
+        );
+
+        chart.setDataSet(
+                new DataSet()
+                        .withSource(
+                                new DataSet.Source<MapDataItem>()
+                                        .withDataProvider(items)
+                                        .withCategoryField("type")
+                                        .withValueField("quantity")
+                        )
+        );
     }
 
 
