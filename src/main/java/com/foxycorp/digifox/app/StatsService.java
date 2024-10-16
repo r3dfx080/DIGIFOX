@@ -36,8 +36,11 @@ public class StatsService {
 
         stats.setExpenses(expenses.stream().map(Expense::getPaid).reduce(0, Integer::sum));
 
-        stats.setNet_profit(orders.stream().map(Order::getPaid).reduce(0, Integer::sum) - stats.getExpenses())
-            
+
+        stats.setNet_profit(orders.stream().map(Order::getPaid).reduce(0, Integer::sum) - stats.getExpenses());
+
+        //hardcoded since migration from excel spreadsheet
+        //stats.setTotal_mins(orders.stream().map(Order::getDuration).reduce(0, Integer::sum) + 397*60);
         stats.setTotal_mins(orders.stream().map(Order::getDuration).reduce(0, Integer::sum));
         
         stats.setVcr_mins_past_cleaning(stats.getTotal_mins() - (maintenances.getLast().getCleaned_on_hrs()*60));

@@ -59,7 +59,9 @@ public class StatsView extends StandardView {
         net_profit.setValue("NET PROFIT: " + stats.getNet_profit().toString());
         expenses.setValue("EXPENSES: " + stats.getExpenses().toString());
         totalHrs.setValue("TOTAL HOURS: " + df.format(stats.getTotal_mins()/60));
-        hrPrice.setValue("HOUR PRICE: " + stats.getNet_profit()/(stats.getTotal_mins()/60-397));
+        //hardcoded since migration from excel spreadsheet
+        //hrPrice.setValue("HOUR PRICE: " + stats.getNet_profit()/(stats.getTotal_mins()/60-397));
+        hrPrice.setValue("HOUR PRICE: " + stats.getNet_profit()/(stats.getTotal_mins()/60));
         hrs_past_cleaning.setValue("HOURS PAST HEADS CLEANING: " + df.format(stats.getVcr_mins_past_cleaning()/60));
         vhs_count.setValue("VHS: " + stats.getVhs_count().toString());
         vhs_c_count.setValue("VHS-C: " + stats.getVhs_c_count().toString());
