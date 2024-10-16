@@ -47,60 +47,69 @@ public class OrderListView extends StandardListView<Order> {
 
     @Subscribe(id = "ordersDl", target = Target.DATA_LOADER)
     public void onOrdersDlPostLoad(final CollectionLoader.PostLoadEvent<Order> event) {
-        ordersDataGrid.addComponentColumn(order ->{
-            Paragraph paragraph = new Paragraph("");
-            if (order.getMedia() != null){
-                List<Media> medias = order.getMedia();
-                for (Media media: medias)
-                    paragraph.add(media.getQuantity() + " " + media.getMediaType().name() + "\n");
-            }
-            return paragraph;
-        })
-                .setKey("medias")
-                .setHeader("Medias")
-                .setResizable(true);
-        ordersDataGrid.addComponentColumn(order -> {
-            Anchor anchor = uiComponents.create(Anchor.class);
-            if (order.getCustomer() != null){
-                String link = order.getCustomer().getProfileLink().toString();
-                if (link == null) anchor.setVisible(false);
-                else {
-                    if (link.startsWith("http")) {
-                        anchor.setText("Profile link");
-                        anchor.setHref(link);
-                    }
-                    else anchor.setText(link);
-                }
-            }
-            else anchor.setVisible(false);
-            return anchor;
-        })
-                .setKey("links")
-                .setHeader("Link")
-                .setResizable(true);
-        ordersDataGrid.addComponentColumn(order -> {
-            Span badge;
-            if (order.getDateOut() != null){
-                Icon icon = VaadinIcon.CHECK.create();
-                icon.getStyle()
-                        .set("padding", "var(--lumo-space-xs")
-                        .set("box-sizing", "border-box");
-                badge = new Span(icon, new Span("Done"));
-                badge.getElement().getThemeList().add("badge success");
-            }
-            else {
-                Icon icon = VaadinIcon.CLOCK.create();
-                icon.getStyle()
-                        .set("padding", "var(--lumo-space-xs")
-                        .set("box-sizing", "border-box");
-                badge = new Span(icon, new Span("Pending"));
-                badge.getElement().getThemeList().add("badge");
-            }
-            return badge;
-        })
-                .setKey("badge")
-                .setResizable(true)
-                .setWidth("6%");
-        ordersDataGrid.setColumnPosition(ordersDataGrid.getColumnByKey("links"),1);
+        if (ordersDataGrid.getColumnByKey("medias") == null) {
+            ordersDataGrid.addComponentColumn(order -> {
+                        Paragraph paragraph = new Paragraph("");
+                        if (order.getMedia() != null) {
+                            List<Media> medias = order.getMedia();
+                            for (Media media : medias)
+                                paragraph.add(media.getQuantity() + " " + media.getMediaType().name() + "\n");
+                        }
+                        return paragraph;
+                    })
+                    .setKey("medias")
+                    .setHeader("Medias")
+                    .setResizable(true);
+
+        }
+        if (ordersDataGrid.getColumnByKey("links") == null) {
+            ordersDataGrid.addComponentColumn(order -> {
+                        Anchor anchor = uiComponents.create(Anchor.class);
+                        if (order.getCustomer() != null) {
+                            String link = order.getCustomer().getProfileLink().toString();
+                            if (link == null) anchor.setVisible(false);
+                            else {
+                                if (link.startsWith("http")) {
+                                    anchor.setText("Profile link");
+                                    anchor.setHref(link);
+                                } else anchor.setText(link);
+                            }
+                        } else anchor.setVisible(false);
+                        return anchor;
+                    })
+                    .setKey("links")
+                    .setHeader("Profile")
+                    .setResizable(true);
+
+        }
+        if (ordersDataGrid.getColumnByKey("badges") == null) {
+            ordersDataGrid.addComponentColumn(order -> {
+                        Span badge;
+                        if (order.getDateOut() != null) {
+                            Icon icon = VaadinIcon.CHECK.create();
+                            icon.getStyle()
+                                    .set("padding", "var(--lumo-space-xs")
+                                    .set("box-sizing", "border-box");
+                            badge = new Span(icon, new Span("Done"));
+                            badge.getElement().getThemeList().add("badge success");
+                        } else {
+                            Icon icon = VaadinIcon.CLOCK.create();
+                            icon.getStyle()
+                                    .set("padding", "var(--lumo-space-xs")
+                                    .set("box-sizing", "border-box");
+                            badge = new Span(icon, new Span("Pending"));
+                            badge.getElement().getThemeList().add("badge");
+                        }
+                        return badge;
+                    })
+                    .setKey("badges")
+                    .setHeader("Status")
+                    .setResizable(true)
+                    .setWidth("6%");
+
+        }
+        ordersDataGrid.setColumnPosition(ordersDataGrid.getColumnByKey("badges"),0);
+        ordersDataGrid.setColumnPosition(ordersDataGrid.getColumnByKey("links"),2);
+        ordersDataGrid.setColumnPosition(ordersDataGrid.getColumnByKey("medias"),7);
     }
 }
